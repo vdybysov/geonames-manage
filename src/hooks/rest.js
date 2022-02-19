@@ -19,6 +19,10 @@ export const useRest = (path) => {
         ).then(handleResponse),
         nextId: () => axios.get(
             BASE_URL + path + '/nextId'
+        ).then(handleResponse),
+        del: (params) => axios.delete(
+            BASE_URL + path,
+            { params }
         ).then(handleResponse)
     }
 }

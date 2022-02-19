@@ -21,6 +21,7 @@
     export let props;
     export let provider;
     export let saver;
+    export let remover;
 
     let loading = false;
     let items = [];
@@ -85,6 +86,19 @@
             errorSnackbar && errorSnackbar.open();
         }
     };
+
+    const remove = async (item) => {
+        try {
+            await remover(item);
+            items = items.filter((i) => i[idProp] !== item[idProp]);
+            expandedItem = null;
+            newItem = null;
+        } catch (e) {
+            console.error(e.response);
+            errorText = mapError(e.response.data.error);
+            errorSnackbar && errorSnackbar.open();
+        }
+    };
 </script>
 
 <Snackbar bind:this={errorSnackbar} labelText={errorText}>
@@ -122,7 +136,12 @@
                     </slot>
                     <Cell colspan={visibleProps.length} slot="content">
                         <div transition:slide>
-                            <EditPanel {props} {item} save={() => save(item)} />
+                            <EditPanel
+                                {props}
+                                {item}
+                                save={() => save(item)}
+                                remove={() => remove(item)}
+                            />
                         </div>
                     </Cell>
                 </AccordionRow>

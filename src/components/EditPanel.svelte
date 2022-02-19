@@ -7,6 +7,7 @@
     export let props;
     export let item;
     export let save;
+    export let remove;
 </script>
 
 <div class="edit-panel">
@@ -35,6 +36,10 @@
             <Button on:click={save} variant="raised">
                 <Icon class="material-icons">save</Icon>
                 <Label>Сохранить</Label>
+            </Button>
+            <Button on:click={remove} variant="outlined">
+                <Icon class="material-icons">delete</Icon>
+                <Label>Удалить</Label>
             </Button>
         </Cell>
     </LayoutGrid>

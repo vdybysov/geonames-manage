@@ -1,14 +1,17 @@
 <script>
     import ManageTable from "./components/ManageTable.svelte";
     import { useProviders } from "./hooks/providers";
+    import { useRemovers } from "./hooks/removers";
     import { useSavers } from "./hooks/savers";
 
     const { countries: provider, nextId } = useProviders();
     const { countries: saver } = useSavers();
+    const { countries: remover } = useRemovers();
 </script>
 
 <ManageTable
     {saver}
+    {remover}
     {provider}
     idProp="geoNameId"
     props={[
